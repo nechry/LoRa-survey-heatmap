@@ -26,4 +26,4 @@ jobs:
     - uses: Silleellie/pylint-github-action@v2
       with:
         lint-path: src
-        python-version: 3.11
+        python-version: 3.8
