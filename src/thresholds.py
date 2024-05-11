@@ -1,4 +1,4 @@
-"""Thresholds Generator for HeatMap Generator."""
+""" Thresholds Generator for HeatMap Generator. """
 import sys
 import argparse
 import logging
@@ -47,12 +47,12 @@ class ThresholdGenerator:
                                   contours=5,
                                   thresholds=None).load_data() for title in titles]
         for key in HeatMapGenerator.graphs:
-            res[key]['min'] = min([
+            res[key]['min'] = min(
                 min(value for value in x[key] if value is not None) for x in items
-            ])
-            res[key]['max'] = max([
+            )
+            res[key]['max'] = max(
                 max(value for value in x[key] if value is not None) for x in items
-            ])
+            )
         with open('thresholds.json', 'w', encoding="utf-8") as fh:
             fh.write(json.dumps(res))
         logger.info('Wrote: thresholds.json')
@@ -89,8 +89,7 @@ def set_log_debug():
     set_log_level_format(
         logging.DEBUG,
         "%(asctime)s [%(levelname)s %(filename)s:%(lineno)s - "
-        "%(name)s.%(funcName)s() ] %(message)s"
-    )
+        "%(name)s.%(funcName)s() ] %(message)s")
 
 
 def set_log_level_format(level, formatstring):
