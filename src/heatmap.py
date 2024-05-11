@@ -134,20 +134,23 @@ class HeatMapGenerator:
     def generate(self):
         """Generate heatmap.
 
-        This method generates a heatmap based on the loaded image and data. It performs the following steps:
+        This method generates a heatmap based on the loaded image and data.
+        It performs the following steps:
         1. Loads the image using the _load_image method.
         2. Loads the data using the load_data method.
         3. Appends the x and y coordinates of the corners to the data.
         4. Appends None to the 'label' field of the data.
         5. Sets any None values in the data to 0.
         6. Appends the minimum value of each data field to the data.
-        7. Calculates the number of x and y points for the heatmap grid based on the image dimensions.
+        7. Calculates the number of x and y points for the heatmap 
+        grid based on the image dimensions.
         8. Generates the x and y coordinates for the heatmap grid using numpy.linspace.
         9. Flattens the grid coordinates.
         10. Iterates over the graphs and plots each one using the _plot method.
         11. Logs any errors that occur during plotting.
 
-        Note: This method assumes that the necessary data and image have been loaded before calling generate.
+        Note: This method assumes that the necessary data and image 
+        have been loaded before calling generate.
         """
         self._load_image()
         a = self.load_data()
@@ -190,6 +193,8 @@ class HeatMapGenerator:
     #     )
     #     return at
 
+    # pylint: disable=too-many-branches
+    # pylint: disable=too-many-locals
     def _plot(self, a, key, title, unit, gx, gy, num_x, num_y):
         if key not in a:
             logger.info("Skipping %s due to insufficient data", key)
@@ -246,11 +251,11 @@ class HeatMapGenerator:
 
         # Draw contours if requested and meaningful in this plot
         if self._contours is not None and vmin != vmax:
-            CS = ax.contour(z, colors='k', linewidths=0.5, levels=self._contours,
+            contours = ax.contour(z, colors='k', linewidths=0.5, levels=self._contours,
                             extent=(0, self._image_width,
                                     self._image_height, 0),
                             alpha=0.3, zorder=150, origin='upper')
-            ax.clabel(CS, inline=1, fontsize=6)
+            ax.clabel(contours, inline=1, fontsize=6)
 
         cbar = fig.colorbar(image, orientation="vertical", shrink=0.84,
                             aspect=20, pad=0.02, use_gridspec=True, label=unit)
@@ -282,7 +287,7 @@ class HeatMapGenerator:
                 )
             # end plotting points
 
-        filename = os.path.join(self._path, '%s_%s.png' % (self._title, key))
+        filename = os.path.join(self._path, F"{self._title}_{key}.png" )
         logger.info('Writing plot to: %s', filename)
         pp.savefig(filename, dpi=300)
         pp.close('all')
