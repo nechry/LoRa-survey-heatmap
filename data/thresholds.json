@@ -1,0 +1,18 @@
+{
+    "gateway_rssi": {
+        "min": -120,
+        "max": -60
+    },
+    "gateway_snr": {
+        "min": -13,
+        "max": 10
+    },
+    "sensor_rssi": {
+        "min": -120,
+        "max": -60
+    },
+    "sensor_snr": {
+        "min": -13,
+        "max": 10
+    }
+}

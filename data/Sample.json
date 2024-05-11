@@ -1,0 +1,261 @@
+{
+    "title": "Sample Survey",
+    "img_path": "MapSample.jpg",
+    "survey_points": [
+        {
+            "label": "Pressurized air",
+            "result": {
+                "rssi": -79,
+                "snr": 6,
+                "rssi_min": -89,
+                "snr_min": 5,
+                "rssi_max": -72,
+                "snr_max": 6,
+                "gateway_rssi": -89,
+                "gateway_snr": 9
+            },
+            "x": 925,
+            "y": 48
+        },
+        {
+            "label": "Pressurized air",
+            "result": {
+                "rssi": -76,
+                "snr": 6,
+                "rssi_min": -84,
+                "snr_min": 5,
+                "rssi_max": -70,
+                "snr_max": 6,
+                "gateway_rssi": -88,
+                "gateway_snr": 8
+            },
+            "x": 952,
+            "y": 51
+        },
+        {
+            "label": "Pressurized air",
+            "result": {
+                "rssi": -86,
+                "snr": 6,
+                "rssi_min": -92,
+                "snr_min": 4,
+                "rssi_max": -79,
+                "snr_max": 7,
+                "gateway_rssi": -98,
+                "gateway_snr": 5
+            },
+            "x": 853,
+            "y": 80
+        },
+        {
+            "label": "Pressurized air",
+            "result": {
+                "rssi": -72,
+                "snr": 6,
+                "rssi_min": -76,
+                "snr_min": 5,
+                "rssi_max": -66,
+                "snr_max": 6,
+                "gateway_rssi": -85,
+                "gateway_snr": 8
+            },
+            "x": 891,
+            "y": 97
+        },
+        {
+            "label": "Table water",
+            "result": {
+                "rssi": -95,
+                "snr": 6,
+                "rssi_min": -105,
+                "snr_min": 5,
+                "rssi_max": -88,
+                "snr_max": 6,
+                "gateway_rssi": -103,
+                "gateway_snr": 8
+            },
+            "x": 1251,
+            "y": 247
+        },
+        {
+            "label": "Table water",
+            "result": {
+                "rssi": -89,
+                "snr": 5,
+                "rssi_min": -94,
+                "snr_min": 4,
+                "rssi_max": -87,
+                "snr_max": 6,
+                "gateway_rssi": -96,
+                "gateway_snr": 8
+            },
+            "x": 150,
+            "y": 235
+        },
+        {
+            "label": "Table water",
+            "result": {
+                "rssi": -112,
+                "snr": 2,
+                "rssi_min": -112,
+                "snr_min": 1,
+                "rssi_max": -111,
+                "snr_max": 3,
+                "gateway_rssi": -117,
+                "gateway_snr": -3
+            },
+            "x": 765,
+            "y": 216
+        },
+        {
+            "label": "Table water",
+            "result": {
+                "rssi": -103,
+                "snr": 6,
+                "rssi_min": -104,
+                "snr_min": 5,
+                "rssi_max": -101,
+                "snr_max": 6,
+                "gateway_rssi": -113,
+                "gateway_snr": 5
+            },
+            "x": 882,
+            "y": 220
+        },
+        {
+            "label": "Table water",
+            "result": {
+                "rssi": -95,
+                "snr": 6,
+                "rssi_min": -99,
+                "snr_min": 5,
+                "rssi_max": -84,
+                "snr_max": 7,
+                "gateway_rssi": -103,
+                "gateway_snr": 8
+            },
+            "x": 1192,
+            "y": 678
+        },
+        {
+            "label": "Table water",
+            "result": {
+                "rssi": -84,
+                "snr": 5,
+                "rssi_min": -84,
+                "snr_min": 4,
+                "rssi_max": -83,
+                "snr_max": 6,
+                "gateway_rssi": -98,
+                "gateway_snr": 8
+            },
+            "x": 1187,
+            "y": 255
+        },
+        {
+            "label": "Gaz",
+            "result": {
+                "rssi": -92,
+                "snr": 6,
+                "rssi_min": -94,
+                "snr_min": 5,
+                "rssi_max": -91,
+                "snr_max": 7,
+                "gateway_rssi": -101,
+                "gateway_snr": 9
+            },
+            "x": 794,
+            "y": 244
+        },
+        {
+            "label": "Gaz",
+            "result": {
+                "rssi": -64,
+                "snr": 4,
+                "rssi_min": -70,
+                "snr_min": 3,
+                "rssi_max": -59,
+                "snr_max": 4,
+                "gateway_rssi": -75,
+                "gateway_snr": 9
+            },
+            "x": 1079,
+            "y": 471
+        },
+        {
+            "label": "Demineralized Water",
+            "result": {
+                "rssi": -112,
+                "snr": 2,
+                "rssi_min": -115,
+                "snr_min": -1,
+                "rssi_max": -108,
+                "snr_max": 4,
+                "gateway_rssi": -115,
+                "gateway_snr": 2
+            },
+            "x": 592,
+            "y": 501
+        },
+        {
+            "label": "Demineralized Water",
+            "result": {
+                "rssi": -97,
+                "snr": 5,
+                "rssi_min": -105,
+                "snr_min": 4,
+                "rssi_max": -87,
+                "snr_max": 6,
+                "gateway_rssi": -106,
+                "gateway_snr": 7
+            },
+            "x": 564,
+            "y": 567
+        },
+        {
+            "label": "Industrial water",
+            "result": {
+                "rssi": -90,
+                "snr": 5,
+                "rssi_min": -94,
+                "snr_min": 4,
+                "rssi_max": -86,
+                "snr_max": 5,
+                "gateway_rssi": -99,
+                "gateway_snr": 9
+            },
+            "x": 715,
+            "y": 679
+        },
+        {
+            "label": "Demineralized Water",
+            "result": {
+                "rssi": -84,
+                "snr": 5,
+                "rssi_min": -89,
+                "snr_min": 5,
+                "rssi_max": -80,
+                "snr_max": 6,
+                "gateway_rssi": -87,
+                "gateway_snr": 10
+            },
+            "x": 946,
+            "y": 674
+        },
+        {
+            "label": "Temperature",
+            "result": {
+                "rssi": -64,
+                "snr": 5,
+                "rssi_min": -69,
+                "snr_min": 4,
+                "rssi_max": -61,
+                "snr_max": 5,
+                "gateway_rssi": -78,
+                "gateway_snr": 8
+            },
+            "x": 905,
+            "y": 314
+        }
+    ]
+}

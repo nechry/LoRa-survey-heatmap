@@ -1,0 +1,517 @@
+{
+    "title": "My Survey",
+    "img_path": "../images/GoogleMap.png",
+    "survey_points": [
+        {
+            "counter": "counter",
+            "result": {
+                "rssi": "rssi",
+                "snr": "snr"
+            }
+        },
+        {
+            "counter": "32",
+            "result": {
+                "rssi": "-87",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "33",
+            "result": {
+                "rssi": "-88",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "36",
+            "result": {
+                "rssi": "-89",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "37",
+            "result": {
+                "rssi": "-94",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "43",
+            "result": {
+                "rssi": "-87",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "59",
+            "result": {
+                "rssi": "-112",
+                "snr": "2"
+            }
+        },
+        {
+            "counter": "60",
+            "result": {
+                "rssi": "-115",
+                "snr": "-1"
+            }
+        },
+        {
+            "counter": "61",
+            "result": {
+                "rssi": "-108",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "67",
+            "result": {
+                "rssi": "-87",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "68",
+            "result": {
+                "rssi": "-100",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "69",
+            "result": {
+                "rssi": "-105",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "80",
+            "result": {
+                "rssi": "-90",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "82",
+            "result": {
+                "rssi": "-87",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "83",
+            "result": {
+                "rssi": "-92",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "84",
+            "result": {
+                "rssi": "-94",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "85",
+            "result": {
+                "rssi": "-86",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "97",
+            "result": {
+                "rssi": "-89",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "98",
+            "result": {
+                "rssi": "-80",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "101",
+            "result": {
+                "rssi": "-81",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "102",
+            "result": {
+                "rssi": "-86",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "117",
+            "result": {
+                "rssi": "-98",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "118",
+            "result": {
+                "rssi": "-97",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "119",
+            "result": {
+                "rssi": "-96",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "120",
+            "result": {
+                "rssi": "-84",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "122",
+            "result": {
+                "rssi": "-99",
+                "snr": "7"
+            }
+        },
+        {
+            "counter": "141",
+            "result": {
+                "rssi": "-88",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "142",
+            "result": {
+                "rssi": "-91",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "143",
+            "result": {
+                "rssi": "-94",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "149",
+            "result": {
+                "rssi": "-105",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "150",
+            "result": {
+                "rssi": "-96",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "151",
+            "result": {
+                "rssi": "-95",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "166",
+            "result": {
+                "rssi": "-92",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "167",
+            "result": {
+                "rssi": "-91",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "168",
+            "result": {
+                "rssi": "-94",
+                "snr": "7"
+            }
+        },
+        {
+            "counter": "170",
+            "result": {
+                "rssi": "-86",
+                "snr": "7"
+            }
+        },
+        {
+            "counter": "171",
+            "result": {
+                "rssi": "-79",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "172",
+            "result": {
+                "rssi": "-81",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "174",
+            "result": {
+                "rssi": "-92",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "175",
+            "result": {
+                "rssi": "-92",
+                "snr": "7"
+            }
+        },
+        {
+            "counter": "12",
+            "result": {
+                "rssi": "-112",
+                "snr": "1"
+            }
+        },
+        {
+            "counter": "13",
+            "result": {
+                "rssi": "-112",
+                "snr": "1"
+            }
+        },
+        {
+            "counter": "14",
+            "result": {
+                "rssi": "-111",
+                "snr": "3"
+            }
+        },
+        {
+            "counter": "39",
+            "result": {
+                "rssi": "-103",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "40",
+            "result": {
+                "rssi": "-101",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "41",
+            "result": {
+                "rssi": "-104",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "54",
+            "result": {
+                "rssi": "-84",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "55",
+            "result": {
+                "rssi": "-84",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "56",
+            "result": {
+                "rssi": "-83",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "64",
+            "result": {
+                "rssi": "-72",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "66",
+            "result": {
+                "rssi": "-84",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "67",
+            "result": {
+                "rssi": "-70",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "68",
+            "result": {
+                "rssi": "-82",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "69",
+            "result": {
+                "rssi": "-71",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "70",
+            "result": {
+                "rssi": "-74",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "78",
+            "result": {
+                "rssi": "-89",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "80",
+            "result": {
+                "rssi": "-72",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "81",
+            "result": {
+                "rssi": "-80",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "82",
+            "result": {
+                "rssi": "-83",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "83",
+            "result": {
+                "rssi": "-76",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "84",
+            "result": {
+                "rssi": "-76",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "88",
+            "result": {
+                "rssi": "-66",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "89",
+            "result": {
+                "rssi": "-73",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "90",
+            "result": {
+                "rssi": "-76",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "91",
+            "result": {
+                "rssi": "-72",
+                "snr": "6"
+            }
+        },
+        {
+            "counter": "60",
+            "result": {
+                "rssi": "-59",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "61",
+            "result": {
+                "rssi": "-64",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "62",
+            "result": {
+                "rssi": "-64",
+                "snr": "3"
+            }
+        },
+        {
+            "counter": "63",
+            "result": {
+                "rssi": "-70",
+                "snr": "3"
+            }
+        },
+        {
+            "counter": "64",
+            "result": {
+                "rssi": "-61",
+                "snr": "4"
+            }
+        },
+        {
+            "counter": "151",
+            "result": {
+                "rssi": "-63",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "152",
+            "result": {
+                "rssi": "-61",
+                "snr": "5"
+            }
+        },
+        {
+            "counter": "1",
+            "result": {
+                "rssi": "-69",
+                "snr": "4"
+            }
+        }
+    ]
+}
