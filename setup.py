@@ -35,7 +35,10 @@ Jean-Francois Auger <jeanfrancois.auger@spie.com> <http://spie.ch>
 
 from setuptools import setup, find_packages
 
-long_description = 'A Python application for LoRa site surveys and present the results as a heatmap overlayed on a floorplan.'
+# read the contents of your README file
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
 requires = [
     'matplotlib==3.3.0',
