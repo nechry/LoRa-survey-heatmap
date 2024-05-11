@@ -1,4 +1,5 @@
 """ Thresholds Generator for HeatMap Generator. """
+# pylint: disable=R0801
 import sys
 import argparse
 import logging

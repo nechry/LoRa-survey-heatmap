@@ -269,7 +269,7 @@ class HeatMapGenerator:
         # Draw floor plan itself to the lowest layer with full opacity
         ax.imshow(self._layout, interpolation='bicubic', zorder=1, alpha=1)
 
-        if (self._show_points):
+        if self._show_points:
             labelsize = FontManager.get_default_size() * 0.4
             # begin plotting points
             for idx in range(0, len(a['x'])):
