@@ -3,7 +3,7 @@
 A Python application for LoRa site surveys and present
 the results as a heatmap overlay on a floor plan.
 
-![pylint]()
+![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)
 
 ## Quick start
 
