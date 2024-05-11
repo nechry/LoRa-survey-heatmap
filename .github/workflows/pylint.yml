@@ -31,7 +31,7 @@ jobs:
           flake8 src --count --max-complexity=10 --max-line-length=79 --statistics
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint $(git ls-files 'src/*.py')
     - uses: Silleellie/pylint-github-action@v2
       with:
         lint-path: src
