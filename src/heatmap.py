@@ -34,6 +34,7 @@ class HeatMapGenerator:
         'gateway_rssi': ['Received Signal Strength Indication', 'dBm'],
         'gateway_snr':  ['Signal-to-Noise Ratio', 'dB'],
     }
+
     # pylint: disable=too-many-arguments
     def __init__(
             self, image_path, survey_path, cname,
@@ -142,14 +143,14 @@ class HeatMapGenerator:
         4. Appends None to the 'label' field of the data.
         5. Sets any None values in the data to 0.
         6. Appends the minimum value of each data field to the data.
-        7. Calculates the number of x and y points for the heatmap 
+        7. Calculates the number of x and y points for the heatmap
         grid based on the image dimensions.
         8. Generates the x and y coordinates for the heatmap grid using numpy.linspace.
         9. Flattens the grid coordinates.
         10. Iterates over the graphs and plots each one using the _plot method.
         11. Logs any errors that occur during plotting.
 
-        Note: This method assumes that the necessary data and image 
+        Note: This method assumes that the necessary data and image
         have been loaded before calling generate.
         """
         self._load_image()
@@ -252,9 +253,12 @@ class HeatMapGenerator:
         # Draw contours if requested and meaningful in this plot
         if self._contours is not None and vmin != vmax:
             contours = ax.contour(z, colors='k', linewidths=0.5, levels=self._contours,
-                            extent=(0, self._image_width,
-                                    self._image_height, 0),
-                            alpha=0.3, zorder=150, origin='upper')
+                                  extent=(0,
+                                          self._image_width,
+                                          self._image_height, 0),
+                                  alpha=0.3,
+                                  zorder=150,
+                                  origin='upper')
             ax.clabel(contours, inline=1, fontsize=6)
 
         cbar = fig.colorbar(image, orientation="vertical", shrink=0.84,
@@ -287,7 +291,7 @@ class HeatMapGenerator:
                 )
             # end plotting points
 
-        filename = os.path.join(self._path, F"{self._title}_{key}.png" )
+        filename = os.path.join(self._path, F"{self._title}_{key}.png")
         logger.info('Writing plot to: %s', filename)
         pp.savefig(filename, dpi=300)
         pp.close('all')

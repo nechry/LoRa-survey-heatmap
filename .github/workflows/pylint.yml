@@ -24,6 +24,12 @@ jobs:
         pip install pylint        
         pip install setuptools
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: flake8 Lint
+      uses: py-actions/flake8@v2
+      with:
+        ignore: "F401"        
+        max-line-length: "120"
+        path: "src"
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files 'src/*.py')

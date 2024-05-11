@@ -18,14 +18,17 @@ logger = logging.getLogger()
 class ThresholdGenerator:
     """Class ThresholdGenerator for HeatMap Generator.
 
-    This class is responsible for generating thresholds for the HeatMap Generator.
-    It provides a method to generate thresholds based on a list of titles.
+    This class is responsible for generating thresholds for the
+    HeatMap Generator.
+    It provides a method to generate thresholds based on a list
+    of titles.
 
     Attributes:
         None
 
     Methods:
-        generate(titles): Generates thresholds based on the given list of titles.
+        generate(titles): Generates thresholds based on the
+        given list of titles.
 
     """
 
@@ -46,13 +49,17 @@ class ThresholdGenerator:
                                   cname=None,
                                   show_points=False,
                                   contours=5,
-                                  thresholds=None).load_data() for title in titles]
+                                  thresholds=None)
+                 .load_data() for title in titles]
+
         for key in HeatMapGenerator.graphs:
             res[key]['min'] = min(
-                min(value for value in x[key] if value is not None) for x in items
+                min(value for value in x[key] if value is not None)
+                for x in items
             )
             res[key]['max'] = max(
-                max(value for value in x[key] if value is not None) for x in items
+                max(value for value in x[key] if value is not None)
+                for x in items
             )
         with open('thresholds.json', 'w', encoding="utf-8") as fh:
             fh.write(json.dumps(res))
@@ -69,8 +76,11 @@ def parse_args(argv):
     p = argparse.ArgumentParser(
         description='LoRa survey heatmap threshold generator'
     )
-    p.add_argument('-v', '--verbose', dest='verbose', action='count', default=0,
-                   help='verbose output. specify twice for debug-level output.')
+    p.add_argument('-v', '--verbose',
+                   dest='verbose',
+                   action='count',
+                   default=0,
+                   help='verbose output.')
     p.add_argument(
         'TITLE', type=str, help='Title for survey (and data filename)',
         nargs='+'
