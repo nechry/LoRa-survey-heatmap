@@ -11,15 +11,41 @@ FORMAT = "[%(asctime)s %(levelname)s] %(message)s"
 logging.basicConfig(level=logging.WARNING, format=FORMAT)
 logger = logging.getLogger()
 
+# pylint: disable=too-few-public-methods
 
-class ThresholdGenerator(object):
-    """Class Threshold for HeatMap Generator"""
+
+class ThresholdGenerator:
+    """Class ThresholdGenerator for HeatMap Generator.
+
+    This class is responsible for generating thresholds for the HeatMap Generator.
+    It provides a method to generate thresholds based on a list of titles.
+
+    Attributes:
+        None
+
+    Methods:
+        generate(titles): Generates thresholds based on the given list of titles.
+
+    """
 
     def generate(self, titles):
-        """Function Generating thresholds."""
+        """Generate thresholds based on the given list of titles.
+
+        Args:
+            titles (list): A list of titles.
+
+        Returns:
+            None
+
+        """
         logger.info('Generating thresholds')
         res = defaultdict(dict)
-        items = [HeatMapGenerator(image_path=None, survey_path=title, cname=None, show_points=False, contours=5, thresholds=None).load_data() for title in titles]
+        items = [HeatMapGenerator(image_path=None,
+                                  survey_path=title,
+                                  cname=None,
+                                  show_points=False,
+                                  contours=5,
+                                  thresholds=None).load_data() for title in titles]
         for key in HeatMapGenerator.graphs:
             res[key]['min'] = min([
                 min(value for value in x[key] if value is not None) for x in items

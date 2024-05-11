@@ -24,7 +24,8 @@ logging.basicConfig(level=logging.WARNING, format=FORMAT)
 logger = logging.getLogger()
 
 
-class HeatMapGenerator(object):
+# pylint: disable=too-many-instance-attributes
+class HeatMapGenerator:
     """Class HeatMapGenerator for generating HeatMap from survey data."""
 
     graphs = {
@@ -33,9 +34,10 @@ class HeatMapGenerator(object):
         'gateway_rssi': ['Received Signal Strength Indication', 'dBm'],
         'gateway_snr':  ['Signal-to-Noise Ratio', 'dB'],
     }
-    
+    # pylint: disable=too-many-arguments
     def __init__(
-            self, image_path, survey_path, cname, show_points=False, contours=False, thresholds=None):
+            self, image_path, survey_path, cname,
+            show_points=False, contours=False, thresholds=None):
         self._ap_names = {}
         self._layout = None
         self._image_width = 0
@@ -49,7 +51,7 @@ class HeatMapGenerator(object):
         self._contours = contours
         self._show_points = show_points
         logger.info(
-            'Initialized HeatMapGenerator; title=%s, file=%s, cname=%s',  self._title, 
+            'Initialized HeatMapGenerator; title=%s, file=%s, cname=%s',  self._title,
             self._file_name, cname)
         with open(self._file_name, 'r', encoding='utf-8') as fh:
             self._data = json.loads(fh.read())
@@ -78,7 +80,16 @@ class HeatMapGenerator(object):
         logger.debug('Available fonts: %s', font_list)
 
     def get_colormap(self, cname):
-        """Get colormap from matplotlib.cm or custom colormap."""
+        """
+        Get colormap from matplotlib.cm or custom colormap.
+
+        Parameters:
+        - cname (str): The name of the colormap to retrieve.
+
+        Returns:
+        - colormap: The colormap object.
+
+        """
         multi_string = cname.split('//')
         if len(multi_string) == 2:
             cname = multi_string[0]
@@ -121,7 +132,23 @@ class HeatMapGenerator(object):
         )
 
     def generate(self):
-        """Generate heatmap."""
+        """Generate heatmap.
+
+        This method generates a heatmap based on the loaded image and data. It performs the following steps:
+        1. Loads the image using the _load_image method.
+        2. Loads the data using the load_data method.
+        3. Appends the x and y coordinates of the corners to the data.
+        4. Appends None to the 'label' field of the data.
+        5. Sets any None values in the data to 0.
+        6. Appends the minimum value of each data field to the data.
+        7. Calculates the number of x and y points for the heatmap grid based on the image dimensions.
+        8. Generates the x and y coordinates for the heatmap grid using numpy.linspace.
+        9. Flattens the grid coordinates.
+        10. Iterates over the graphs and plots each one using the _plot method.
+        11. Logs any errors that occur during plotting.
+
+        Note: This method assumes that the necessary data and image have been loaded before calling generate.
+        """
         self._load_image()
         a = self.load_data()
         for x, y in self._corners:
@@ -143,6 +170,7 @@ class HeatMapGenerator(object):
             try:
                 logger.info(title)
                 self._plot(a, k, title[0], title[1], gx, gy, num_x, num_y)
+            # pylint: disable=broad-exception-caught
             except Exception as e:
                 logger.error(e)
                 logger.warning('Cannot create %s plot: insufficient data', k)
