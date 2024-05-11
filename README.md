@@ -3,6 +3,8 @@
 A Python application for LoRa site surveys and present
 the results as a heatmap overlay on a floor plan.
 
+![pylint]()
+
 ## Quick start
 
 Check out the **Running In Docker** steps below to get single-line commands that run without the need to install *anything* on your computer (thanks to using `docker`).
