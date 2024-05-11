@@ -30,9 +30,9 @@ class HeatMapGenerator:
 
     graphs = {
         'sensor_rssi': ['Received Signal Strength Indication', 'dBm'],
-        'sensor_snr':  ['Signal-to-Noise Ratio', 'dB'],
+        'sensor_snr': ['Signal-to-Noise Ratio', 'dB'],
         'gateway_rssi': ['Received Signal Strength Indication', 'dBm'],
-        'gateway_snr':  ['Signal-to-Noise Ratio', 'dB'],
+        'gateway_snr': ['Signal-to-Noise Ratio', 'dB'],
     }
 
     # pylint: disable=too-many-arguments
@@ -52,7 +52,7 @@ class HeatMapGenerator:
         self._contours = contours
         self._show_points = show_points
         logger.info(
-            'Initialized HeatMapGenerator; title=%s, file=%s, cname=%s',  self._title,
+            'Initialized HeatMapGenerator; title=%s, file=%s, cname=%s', self._title,
             self._file_name, cname)
         with open(self._file_name, 'r', encoding='utf-8') as fh:
             self._data = json.loads(fh.read())
@@ -99,7 +99,7 @@ class HeatMapGenerator:
             colormap = cm.get_cmap(cname, num)
             new_colors = colormap(numpy.linspace(0, 1, num))
             rgba = numpy.array([0, 0, 0, 1])
-            interval = int(num/steps) if steps > 0 else 0
+            interval = int(num / steps) if steps > 0 else 0
             for i in range(0, num, interval):
                 new_colors[i] = rgba
             print(new_colors)
@@ -234,7 +234,7 @@ class HeatMapGenerator:
         else:
             # Uniform array with the same color everywhere
             # (avoids interpolation artifacts)
-            z = numpy.ones((num_y, num_x))*vmin
+            z = numpy.ones((num_y, num_x)) * vmin
         # Render the interpolated data to the plot
         ax.axis('off')
 
