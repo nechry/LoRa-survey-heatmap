@@ -33,7 +33,7 @@ class HeatMapGenerator(object):
         'gateway_rssi': ['Received Signal Strength Indication', 'dBm'],
         'gateway_snr':  ['Signal-to-Noise Ratio', 'dB'],
     }
-
+    
     def __init__(
             self, image_path, survey_path, cname, show_points=False, contours=False, thresholds=None):
         self._ap_names = {}
@@ -329,9 +329,15 @@ def main():
         set_log_info()
 
     print(args)
-    HeatMapGenerator(image_path=args.IMAGE, survey_path=args.FILE, cname=args.CNAME,
-                     show_points=args.show_points > 0, contours=args.N, thresholds=args.thresholds).generate()
-    
+    HeatMapGenerator(
+        image_path=args.IMAGE,
+        survey_path=args.FILE,
+        cname=args.CNAME,
+        show_points=args.show_points > 0,
+        contours=args.N,
+        thresholds=args.thresholds
+    ).generate()
+
 
 if __name__ == '__main__':
     main()
