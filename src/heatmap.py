@@ -1,24 +1,23 @@
+"""Module providing the Heat Map Generator."""
+
+import argparse
+import json
+import logging
 import os
 import sys
-import argparse
-import logging
-import json
-import numpy
-
 from collections import defaultdict
-import numpy as np
-import matplotlib.cm as cm
-import matplotlib.pyplot as pp
-from scipy.interpolate import Rbf
-from pylab import imread
+from pathlib import Path
+
+import matplotlib
+import numpy
+from matplotlib import cm
+from matplotlib import pyplot as pp
+from matplotlib.colors import ListedColormap
 # from matplotlib.offsetbox import AnchoredText
 # from matplotlib.patheffects import withStroke
 from matplotlib.font_manager import FontManager
-from matplotlib.colors import ListedColormap
-import matplotlib
-
-from pathlib import Path
-
+from pylab import imread
+from scipy.interpolate import Rbf
 
 FORMAT = "[%(asctime)s %(levelname)s] %(message)s"
 logging.basicConfig(level=logging.WARNING, format=FORMAT)
@@ -26,6 +25,7 @@ logger = logging.getLogger()
 
 
 class HeatMapGenerator(object):
+    """Class HeatMapGenerator for generating HeatMap from survey data."""
 
     graphs = {
         'sensor_rssi': ['Received Signal Strength Indication', 'dBm'],
@@ -35,7 +35,7 @@ class HeatMapGenerator(object):
     }
 
     def __init__(
-            self, image_path, survey_path, show_points, cname, contours, thresholds=None):
+            self, image_path, survey_path, cname, show_points=False, contours=False, thresholds=None):
         self._ap_names = {}
         self._layout = None
         self._image_width = 0
@@ -43,28 +43,26 @@ class HeatMapGenerator(object):
         self._corners = [(0, 0), (0, 0), (0, 0), (0, 0)]
 
         self._file_name = os.path.abspath(survey_path)
-
         self._path = os.path.dirname(self._file_name)
         self._title = Path(self._file_name).stem
-        self._show_points = show_points
         self._cmap = self.get_colormap(cname)
         self._contours = contours
+        self._show_points = show_points
         logger.info(
-            'Initialized HeatMapGenerator; title=%s, file=%s, cname=%s',  self._title, self._file_name, cname
-        )
-        with open(self._file_name, 'r',encoding='utf-8') as fh:
+            'Initialized HeatMapGenerator; title=%s, file=%s, cname=%s',  self._title, 
+            self._file_name, cname)
+        with open(self._file_name, 'r', encoding='utf-8') as fh:
             self._data = json.loads(fh.read())
         if 'survey_points' not in self._data:
-            logger.error(
-                'No survey points found in {}'.format(self._file_name))
-            exit()
+            logger.error("Error: No survey points found in %s",
+                         self._file_name)
+            sys.exit(0)
         logger.info('Loaded %d survey points',
                     len(self._data['survey_points']))
         if image_path is None:
             if 'img_path' not in self._data:
-                logger.error(
-                    'No image path found in {}'.format(self._file_name))
-                exit(1)
+                logger.error("No image path found in %f", self._file_name)
+                sys.exit(1)
             self._image_path = os.path.abspath(self._data['img_path'])
         else:
             self._image_path = os.path.abspath(image_path)
@@ -72,40 +70,41 @@ class HeatMapGenerator(object):
         self.thresholds = {}
         if thresholds is not None:
             logger.info('Loading thresholds from: %s', thresholds)
-            with open(thresholds, 'r') as fh:
-                self.thresholds = json.loads(fh.read())
+            with open(thresholds, "r", encoding="utf-8") as threshold:
+                self.thresholds = json.loads(threshold.read())
             logger.debug('Thresholds: %s', self.thresholds)
-            
+
         font_list = sorted(matplotlib.font_manager.get_font_names())
         logger.debug('Available fonts: %s', font_list)
 
     def get_colormap(self, cname):
+        """Get colormap from matplotlib.cm or custom colormap."""
         multi_string = cname.split('//')
         if len(multi_string) == 2:
             cname = multi_string[0]
             steps = int(multi_string[1])
-            N = 256
-            colormap = cm.get_cmap(cname, N)
-            new_colors = colormap(np.linspace(0, 1, N))
-            rgba = np.array([0, 0, 0, 1])
-            interval = int(N/steps) if steps > 0 else 0
-            for i in range(0, N, interval):
+            num = 256
+            colormap = cm.get_cmap(cname, num)
+            new_colors = colormap(numpy.linspace(0, 1, num))
+            rgba = numpy.array([0, 0, 0, 1])
+            interval = int(num/steps) if steps > 0 else 0
+            for i in range(0, num, interval):
                 new_colors[i] = rgba
             print(new_colors)
             return ListedColormap(new_colors)
-        else:
-            return pp.get_cmap(cname)
+        return pp.get_cmap(cname)
 
     def load_data(self):
+        """Load data from survey file."""
         a = defaultdict(list)
         for row in self._data['survey_points']:
             a['x'].append(row['x'])
             a['y'].append(row['y'])
             a['label'].append(row['label'])
             a['sensor_rssi'].append(row['result']['rssi'])
-            a['sensor_snr'].append(row['result']['snr'])    
+            a['sensor_snr'].append(row['result']['snr'])
             a['gateway_rssi'].append(row['result']['gateway_rssi'])
-            a['gateway_snr'].append(row['result']['gateway_snr']) 
+            a['gateway_snr'].append(row['result']['gateway_snr'])
         return a
 
     def _load_image(self):
@@ -122,6 +121,7 @@ class HeatMapGenerator(object):
         )
 
     def generate(self):
+        """Generate heatmap."""
         self._load_image()
         a = self.load_data()
         for x, y in self._corners:
@@ -135,18 +135,17 @@ class HeatMapGenerator(object):
                 a[k].append(min(a[k]))
         num_x = int(self._image_width / 4)
         num_y = int(num_x / (self._image_width / self._image_height))
-        x = np.linspace(0, self._image_width, num_x)
-        y = np.linspace(0, self._image_height, num_y)
-        gx, gy = np.meshgrid(x, y)
+        x = numpy.linspace(0, self._image_width, num_x)
+        y = numpy.linspace(0, self._image_height, num_y)
+        gx, gy = numpy.meshgrid(x, y)
         gx, gy = gx.flatten(), gy.flatten()
-        for k, ptitle in self.graphs.items():
+        for k, title in self.graphs.items():
             try:
-                logger.info(ptitle)
-                self._plot(a, k, ptitle[0], ptitle[1], gx, gy, num_x, num_y)
+                logger.info(title)
+                self._plot(a, k, title[0], title[1], gx, gy, num_x, num_y)
             except Exception as e:
                 logger.error(e)
-                logger.warning(
-                    'Cannot create {} plot: insufficient data'.format(k))
+                logger.warning('Cannot create %s plot: insufficient data', k)
 
     # def _add_inner_title(self, ax, title, loc, size=None, **kwargs):
     #     logger.info('add_inner_title')
@@ -165,17 +164,17 @@ class HeatMapGenerator(object):
 
     def _plot(self, a, key, title, unit, gx, gy, num_x, num_y):
         if key not in a:
-            logger.info("Skipping {} due to insufficient data".format(key))
+            logger.info("Skipping %s due to insufficient data", key)
             return
         if not len(a['x']) == len(a['y']) == len(a[key]):
-            logger.info("Skipping {} because data has holes".format(key))
+            logger.info("Skipping %s because data has holes", key)
             return
         logger.info('Plotting: %s', key)
         pp.rcParams['figure.figsize'] = (
             self._image_width / 100, self._image_height / 100
         )
         fig, ax = pp.subplots()
-        ax.set_title(title, fontname = "DejaVu Sans", fontsize = 10)
+        ax.set_title(title, fontname="DejaVu Sans", fontsize=10)
         if 'min' in self.thresholds.get(key, {}):
             vmin = self.thresholds[key]['min']
             logger.info('Using min threshold from thresholds: %s', vmin)
@@ -190,7 +189,7 @@ class HeatMapGenerator(object):
             vmax = max(a[key])
             logger.info('Using calculated max threshold: %s', vmax)
 
-        logger.info("{} has range [{},{}]".format(key, vmin, vmax))
+        logger.info("%s has range [%s,%s]", key, vmin, vmax)
         # Interpolate the data only if there is something to interpolate
         if vmin != vmax:
             rbf = Rbf(
@@ -224,20 +223,20 @@ class HeatMapGenerator(object):
                                     self._image_height, 0),
                             alpha=0.3, zorder=150, origin='upper')
             ax.clabel(CS, inline=1, fontsize=6)
-        
-        
-        cbar = fig.colorbar(image, orientation="vertical", shrink=0.84, aspect=20, pad=0.02, use_gridspec=True,label=unit)        
+
+        cbar = fig.colorbar(image, orientation="vertical", shrink=0.84,
+                            aspect=20, pad=0.02, use_gridspec=True, label=unit)
         # change the tick label size of colorbar
         image.figure.axes[1].tick_params(axis="y", labelsize=4)
-        
+
         # Print only one ytick label when there is only one value to be shown
         if vmin == vmax:
             cbar.set_ticks([vmin])
 
         # Draw floor plan itself to the lowest layer with full opacity
         ax.imshow(self._layout, interpolation='bicubic', zorder=1, alpha=1)
-        
-        if(self._show_points):
+
+        if (self._show_points):
             labelsize = FontManager.get_default_size() * 0.4
             # begin plotting points
             for idx in range(0, len(a['x'])):
@@ -252,7 +251,7 @@ class HeatMapGenerator(object):
                     a['x'][idx], a['y'][idx] - 13,
                     a['label'][idx], fontsize=labelsize,
                     horizontalalignment='center'
-                )                
+                )
             # end plotting points
 
         filename = os.path.join(self._path, '%s_%s.png' % (self._title, key))
@@ -271,7 +270,7 @@ def parse_args(argv):
     p = argparse.ArgumentParser(description='LoRa survey heatmap generator')
     p.add_argument('-v', '--verbose', dest='verbose', action='count', default=0,
                    help='verbose output. specify twice for debug-level output.')
-    p.add_argument('-c', '--cmap', type=str, dest='CNAME', action='store',
+    p.add_argument('-c', '--colormap', type=str, dest='CNAME', action='store',
                    default="RdYlBu_r",
                    help='If specified, a valid matplotlib colormap name.')
     p.add_argument('-n', '--contours', type=int, dest='N', action='store',
@@ -282,7 +281,7 @@ def parse_args(argv):
     p.add_argument(
         'FILE', type=str, help='Filename for survey'
     )
-    p.add_argument('-s', '--show-points', dest='showpoints', action='count',
+    p.add_argument('-s', '--show-points', dest='show_points', action='count',
                    default=0, help='show measurement points in file')
     p.add_argument('-t', '--thresholds', dest='thresholds', action='store',
                    type=str, help='thresholds JSON file path')
@@ -305,21 +304,22 @@ def set_log_debug():
     )
 
 
-def set_log_level_format(level, format):
+def set_log_level_format(level, formatstring):
     """
     Set logger level and format.
 
     :param level: logging level; see the :py:mod:`logging` constants.
     :type level: int
-    :param format: logging formatter format string
-    :type format: str
+    :param formatstring: logging formatter format string
+    :type formatstring: str
     """
-    formatter = logging.Formatter(fmt=format)
+    formatter = logging.Formatter(fmt=formatstring)
     logger.handlers[0].setFormatter(formatter)
     logger.setLevel(level)
 
 
 def main():
+    """ main entry """
     args = parse_args(sys.argv[1:])
 
     # set logging level
@@ -328,10 +328,10 @@ def main():
     elif args.verbose == 1:
         set_log_info()
 
-    showpoints = True if args.showpoints > 0 else False
-    HeatMapGenerator(args.IMAGE, args.FILE, showpoints, args.CNAME,
-                     args.N, thresholds=args.thresholds).generate()
-
+    print(args)
+    HeatMapGenerator(image_path=args.IMAGE, survey_path=args.FILE, cname=args.CNAME,
+                     show_points=args.show_points > 0, contours=args.N, thresholds=args.thresholds).generate()
+    
 
 if __name__ == '__main__':
     main()

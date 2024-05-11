@@ -1,10 +1,11 @@
+"""Thresholds Generator for HeatMap Generator."""
 import sys
 import argparse
 import logging
 import json
 from collections import defaultdict
 
-from lora_survey_heatmap.heatmap import heatmap
+from heatmap import HeatMapGenerator
 
 FORMAT = "[%(asctime)s %(levelname)s] %(message)s"
 logging.basicConfig(level=logging.WARNING, format=FORMAT)
@@ -12,19 +13,21 @@ logger = logging.getLogger()
 
 
 class ThresholdGenerator(object):
+    """Class Threshold for HeatMap Generator"""
 
     def generate(self, titles):
+        """Function Generating thresholds."""
         logger.info('Generating thresholds')
         res = defaultdict(dict)
-        items = [HeatMapGenerator(None, t).load_data() for t in titles]
-        for key in HeatMapGenerator.graphs.keys():
+        items = [HeatMapGenerator(image_path=None, survey_path=title, cname=None, show_points=False, contours=5, thresholds=None).load_data() for title in titles]
+        for key in HeatMapGenerator.graphs:
             res[key]['min'] = min([
                 min(value for value in x[key] if value is not None) for x in items
             ])
             res[key]['max'] = max([
                 max(value for value in x[key] if value is not None) for x in items
             ])
-        with open('thresholds.json', 'w') as fh:
+        with open('thresholds.json', 'w', encoding="utf-8") as fh:
             fh.write(json.dumps(res))
         logger.info('Wrote: thresholds.json')
 
@@ -64,21 +67,22 @@ def set_log_debug():
     )
 
 
-def set_log_level_format(level, format):
+def set_log_level_format(level, formatstring):
     """
-    Set logger level and format.
+    Set logger level and fmt.
 
     :param level: logging level; see the :py:mod:`logging` constants.
     :type level: int
-    :param format: logging formatter format string
-    :type format: str
+    :param formatstring: logging format string
+    :type formatstring: str
     """
-    formatter = logging.Formatter(fmt=format)
+    formatter = logging.Formatter(fmt=formatstring)
     logger.handlers[0].setFormatter(formatter)
     logger.setLevel(level)
 
 
 def main():
+    """ main entry"""
     args = parse_args(sys.argv[1:])
 
     # set logging level

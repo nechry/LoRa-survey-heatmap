@@ -1,12 +1,18 @@
 {
     "cSpell.words": [
+        "chirpstack",
         "cmap",
+        "colormap",
+        "floorplan",
         "imread",
         "levelname",
         "linspace",
         "matplotlib",
+        "milliwatts",
         "offsetbox",
         "patheffects",
+        "Pnoise",
+        "Preceived",
         "pylab",
         "pyplot",
         "scipy"

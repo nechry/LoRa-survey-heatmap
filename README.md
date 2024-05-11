@@ -1,7 +1,7 @@
 # LoRa-survey-heatmap
 
 A Python application for LoRa site surveys and present
-the results as a heatmap overlayed on a floorplan.
+the results as a heatmap overlay on a floor plan.
 
 ## Quick start
 
@@ -11,7 +11,7 @@ Creating a heatmap using the software consists of the following three essential 
 1. Perform a LoRa site coverage survey with a FieldTest device.
 2. Mark every measurements on the map with a marker with corresponding packet number.
 3. Create your json survey file with the measurements, and locations called to the image size. An easy way will be via the chirpstack export and filtered and converted with my nodejs converter, see more down bellow.
-4. Once done with all the measurements, use the `lora-heatmap` tool to compute a high-resolution heatmap from your recorded data. 
+4. Once done with all the measurements, use the `lora-heatmap` tool to compute a high-resolution heatmap from your recorded data.
 
 In case your data turns out to be too coarse, you can always go back to step 2 and delete or move old and also add new measurements at any time.
 
@@ -25,22 +25,42 @@ Tested with Python 3.8.
 
 ## Usage
 
-Add `--show-points` to see the measurement points in the generated maps. Typically, they aren't important when you have a sufficiently dense grid of points so they are hidden by default.
+Show help with the following command:
 
-Add `--contours [N]` If specified, N contour lines will be added to the graphs.
+``` bash
+python3 src/heatmap.py --help
+usage: heatmap.py [-h] [-v] [-c CNAME] [-n N] [-p IMAGE] [-s] [-t THRESHOLDS] FILE
 
-Add `--verbose` to get a verbose output.
+LoRa survey heatmap generator
 
-Add `--picture` to set the path to background image.
+positional arguments:
+  FILE                  Filename for survey
 
-Add `--thresholds` to set the path thresholds JSON file path.
+options:
+  -h, --help            show this help message and exit
+  -v, --verbose         verbose output. specify twice for debug-level output.
+  -c CNAME, --colormap CNAME
+                        If specified, a valid matplotlib colormap name.
+  -n N, --contours N    If specified, N contour lines will be added to the graphs
+  -p IMAGE, --picture IMAGE
+                        Path to background image
+  -s, --show-points     show measurement points in file
+  -t THRESHOLDS, --thresholds THRESHOLDS
+                        thresholds JSON file path
+```
+
+Mandatory `--picture` to set the path to background image.
+Optional `--show-points` to see the measurement points in the generated maps. Typically, they aren't important when you have a sufficiently dense grid of points so they are hidden by default.
+Optional `--contours [N]` If specified, N contour lines will be added to the graphs.
+Optional `--verbose` to get a verbose output.
+Optional `--thresholds` to set the path thresholds JSON file path.
 
 ### Running In Python
 
 you need to have the following files in the data folder:
 
 * a json file with the survey data, check the [Sample.json](data/Sample.json) file for the format.
-* a picture of the floorplan
+* a picture of the floor plan
 * a json file with the thresholds (optional), check the [thresholds.json](data/thresholds.json) file for the format.
 
 ```bash
@@ -49,7 +69,7 @@ python src/heatmap.py data/Sample.json --verbose --contours 5 --show-points --pi
 
 ### Running In Docker
 
-recommanded and easy way
+Recommended and easy way
 
 ```bash
 docker run -it --rm -v ./data:/data -w /data --name heatmap docker.io/nechry/python-lora-survey-heatmap:latest bash -c "python /app/heatmap.py Sample.json --verbose --contours 5 --show-points --picture MapSample.jpg  --thresholds thresholds.json"
@@ -106,7 +126,7 @@ node .\survey\convert.js --data data\device-0018b20000020e3c.json
 
 `data` argument is required
 `title` argument is optional
-`locations` arguments to randomly generate location for a x y min max range `[x_min,x_max_,y_min,y_max]` 
+`locations` arguments to randomly generate location for a x y min max range `[x_min,x_max_,y_min,y_max]`
 
 example with locations and title:
 
